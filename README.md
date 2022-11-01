@@ -14,6 +14,7 @@ the server to send back the contents of the requested file name “sample.txt”
 8. Write a program to implement the Diffie-Hellman Key Exchange algorithm.
 
 <h2>Part B: Simulation Using NS-2</h2>
+
 1. Simulate three nodes point-to-point networks with duplex links between them. Set the queue size and vary the bandwidth and find the number of packets dropped
 2. Simulate the different types of internet traffic such as FTP and TELNET over network and analyze the throughput
 3. Simulate a four-node point-to-point network, and connect the links as follows: n0->n2, n1- >n2 and n2->n3. Apply TCP agent changing the parameters and determine the number of packets sent/received by TCP/UDP
