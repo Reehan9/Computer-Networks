@@ -1,76 +1,62 @@
-// program for implementing the error detection technique for data transfer in unreliable network code using CRC (16-bits) Technique.
-#include <iostream>
-#include <string.h>
-
+// internet checksum for error correction and detection.
+// Created by:  Reehan
+#include "iostream"
+#include "string"
+#include "vector"
+#include "algorithm"
+#include "cmath"
 using namespace std;
 int main() {
-    int i, j ;
-    char data[100], div[100], temp[100], quot[100], rem[100], key[30];
-    cout << "Enter Data: ";
+    string data;
+    cout << "Enter the data: ";
     cin >> data;
-    cout << "Enter Key: ";
-    cin >> key;
-    int keylen = strlen(key);
-    int datalen = strlen(data);
-    strcpy(div, key);
-    for (i = 0; i < keylen - 1; i++) {
-        data[datalen + i] = '0';
+    int n = data.length();
+    int m = ceil(log2(n));
+    int r = pow(2, m) - n - 1;
+    string data1 = data;
+    for (int i = 0; i < r; i++) {
+        data1 += '0';
     }
-    for (i = 0; i < keylen; i++)
-        temp[i] = data[i];
-    for (i = 0; i < datalen; i++) {
-        quot[i] = temp[0];
-        if (quot[i] == '0')
-            for (j = 0; j < keylen; j++)
-                div[j] = '0';
-        else
-            for (j = 0; j < keylen; j++)
-                div[j] = key[j];
-        for (j = keylen - 1; j > 0; j--) {
-            if (temp[j] == div[j])
-                rem[j - 1] = '0';
-            else
-                rem[j - 1] = '1';
+    vector<string> v;
+    for (int i = 0; i < m; i++) {
+        string s = "";
+        for (int j = 0; j < pow(2, i); j++) {
+            for (int k = 0; k < pow(2, m - i - 1); k++) {
+                s += '0';
+            }
+            for (int k = 0; k < pow(2, m - i - 1); k++) {
+                s += '1';
+            }
         }
-        rem[keylen - 1] = data[i + keylen];
-        strcpy(temp, rem);
-
+        v.push_back(s);
     }
-    strcpy(rem, temp);
-    cout << "Remainder is: " << rem << endl;
-    for (i = 0; i < keylen - 1; i++)
-        data[datalen + i] = rem[i];
-    cout << "Final codeword is: " << data << endl;
-    cout << "Enter data received: ";
-    cin >> data;
-    for (i = 0; i < keylen; i++)
-        temp[i] = data[i];
-    for (i = 0; i < datalen; i++) {
-        quot[i] = temp[0];
-        if (quot[i] == '0')
-            for (j = 0; j < keylen; j++)
-                div[j] = '0';
-        else
-            for (j = 0; j < keylen; j++)
-                div[j] = key[j];
-        for (j = keylen - 1; j > 0; j--) {
-            if (temp[j] == div[j])
-                rem[j - 1] = '0';
-            else
-                rem[j - 1] = '1';
+    string s = "";
+    for (int i = 0; i < n + r; i++) {
+        int sum = 0;
+        for (int j = 0; j < m; j++) {
+            sum += (v[j][i] - '0') * (data1[i] - '0');
         }
-        rem[keylen - 1] = data[i + keylen];
-        strcpy(temp, rem);
-
+        s += (sum % 2) + '0';
     }
-    strcpy(rem, temp);
-    cout << "Remainder is: " << rem << endl;
-    for (i = 0; i < keylen - 1; i++)
-        if (rem[i] != '0') {
-            cout << "Error detected" << endl;
-            break;
+    reverse(s.begin(), s.end());
+    cout << "Checksum: " << s << endl;
+    cout << "Enter the received data: ";
+    string data2;
+    cin >> data2;
+    string s1 = "";
+    for (int i = 0; i < n + r; i++) {
+        int sum = 0;
+        for (int j = 0; j < m; j++) {
+            sum += (v[j][i] - '0') * (data2[i] - '0');
         }
-    if (i == keylen - 1)
-        cout << "No error detected" << endl;
+        s1 += (sum % 2) + '0';
+    }
+    reverse(s1.begin(), s1.end());
+    cout << "Checksum: " << s1 << endl;
+    if (s1 == s) {
+        cout << "No error" << endl;
+    } else {
+        cout << "Error" << endl;
+    }
     return 0;
 }
