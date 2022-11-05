@@ -16,7 +16,8 @@ int main()
      */
     addr.sin_family = AF_INET; // AF_INET is the address family for IPv4
     //  AF_INET is used when TCP or User Datagram Protocol (UDP) is used.
-    addr.sin_port = htons(7891); // htons() converts the port number to network byte order
+    addr.sin_port = htons(7891); // htons() converts the port number to network byte order 
+    // host to network short - htons
     addr.sin_addr.s_addr = inet_addr("127.0.0.1"); // inet_addr() converts the IP address to network byte order
 
     /*  keep trying to esatablish connection with server */
