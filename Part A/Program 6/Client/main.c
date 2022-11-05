@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <arpa/inet.h> // inet_ntoa()
+#include <arpa/inet.h> // inet_ntoa() // inet = internet networking
 
 int main()
 {
