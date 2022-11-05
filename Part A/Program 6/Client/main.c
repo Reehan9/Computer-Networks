@@ -8,7 +8,7 @@ int main()
     struct sockaddr_in addr; // sockaddr_in is a structure for socket address
 
     /*  socket creates an endpoint for communication and returns a file descriptor */
-    soc = socket(PF_INET, SOCK_STREAM, 0);
+    soc = socket(PF_INET, SOCK_STREAM, 0); // AF = Address Family , PF = Protocol Family 
 
     /*
      * sockaddr_in is used for ip manipulation
