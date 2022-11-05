@@ -19,7 +19,7 @@ int main()
     addr.sin_port = htons(7891); // htons() converts the port number to network byte order 
     // host to network short - htons
     addr.sin_addr.s_addr = inet_addr("127.0.0.1"); // inet_addr() converts the IP address to network byte order
-
+    // addr.s_addr basically tells to accept address to the number assigned
     /*  keep trying to esatablish connection with server */
     while(connect(soc, (struct sockaddr *) &addr, sizeof(addr))) ; // connect() returns 0 on success
     printf("\nClient is connected to Server"); // if connect() returns 0, then the client is connected to the server
