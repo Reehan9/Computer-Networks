@@ -25,7 +25,7 @@ int main() {
     // 5 is the number of queue size
     new_soc = accept(welcome, NULL,
                      NULL); // accept() extracts the first connection request on the queue of pending connections for the listening socket, welcome, creates a new connected socket, and returns a new file descriptor referring to that socket
-    // The two NULLS passed in the arguments are to restrict length and and to restrict some addresses
+    // The two NULLS passed in the arguments are to restrict length and to restrict some addresses
     /*  receive the filename */
     recv(new_soc, fname, 50, 0); // recv() returns the number of bytes received
     printf("\nRequesting for file: %s\n",
