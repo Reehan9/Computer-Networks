@@ -22,6 +22,7 @@ int main() {
     listen(welcome,
            5); // listen() marks the socket referred to by welcome as a passive socket, that is, as a socket that will be used to accept incoming connection requests using accept()
     /*  accept a connection, we get a file descriptor */
+    // 5 is the number of queue size
     new_soc = accept(welcome, NULL,
                      NULL); // accept() extracts the first connection request on the queue of pending connections for the listening socket, welcome, creates a new connected socket, and returns a new file descriptor referring to that socket
 
