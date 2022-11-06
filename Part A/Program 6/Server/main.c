@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <arpa/inet.h> // inet_ntoa()
-#include <fcntl.h> // open()
-#include <unistd.h> // close()
+#include <fcntl.h> // open() , file control options
+#include <unistd.h> // close() , used for functions 
 
 int main() {
     int welcome, new_soc, fd, n; // welcome is the welcome socket, new_soc is the new socket, fd is the file descriptor, n is the number of bytes
